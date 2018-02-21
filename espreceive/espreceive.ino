@@ -1,13 +1,11 @@
 #include "SoftwareSerial.h"
 
 String receivedata;
-String ssid ="";//?�這個就�?String password="";//密碼
+String ssid ="";//ssid
+String password="";//password
 
 SoftwareSerial esp(4, 5);// RX, TX
 String data;
-String server = "120.127.14.91"; // www.example.com
-String uri = "yourURI";// our example is /esppost.php
-String cardNumber;
 
 
 void setup()
