@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>無標題文件</title>
+<style type="text/css">
+#txt {
+	font-family: "微軟正黑體", sans-serif, Arial;
+	font-size: 20px;
+	color: #000;
+}
+h2 {
+	font-family: "微軟正黑體", sans-serif, Arial;
+	font-size: 20px;
+	color: #1B1B1B;
+}
+h1 {
+	font-family: "微軟正黑體", sans-serif, Arial;
+	font-size: 26px;
+	color: #00C;
+}
+</style>
+</head>
+
+<body>
+<table width="1100" border="0" align="center">
+  <tr>
+    <td><h1>ESP8266模組接線、測試及連線</h1>
+      <table width="950" border="1" align="center">
+        <tr>
+          <td><h2 id="txt">步驟一：測試esp8266是否正常(利用FT232燒錄器測試)</h2>
+          <p>1. <a href="https://realterm.sourceforge.io/index.html#downloads_Download">下載Realterm</a></p>
+          <p>2.將FT232與esp8266依照下圖連接(以3.3V為主，5V會燒掉)</p>
+          <p>/*---------建議3.3V不要使用Arduino內建，以外接穩壓晶片為佳-----------*/</p>
+          <table width="900" border="1" align="center">
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+          <p>3.接好後，把FT232插進電腦，確保FT232正常運作，先打開電腦裝置管理員，查看是否運作成功</p>
+          <table width="900" border="1" align="center">
+            <tr>
+              <td><img src="ft232.jpg" width="900" height="639" /></td>
+            </tr>
+          </table>
+          <p>4.打開Realterm，將Ascii旁邊打勾</p>
+          <table width="701" border="1" align="center">
+            <tr>
+              <td><img src="re1.jpg" width="701" height="447" /></td>
+            </tr>
+          </table>
+          <p>5. 在Port書籤處，將(1)鮑率改為&quot;9600&quot;，更改(2)Port為FT232的USB Port位置，按(3)設置完成</p>
+          <table width="701" border="1" align="center">
+            <tr>
+              <td><img src="re2.jpg" width="701" height="447" /></td>
+            </tr>
+          </table>
+          <p>6.接著(1)勾選CR,LF,CR,LF，(2)輸入AT，大小寫皆可，(3)按SendASCII，(4)看到OK即可。</p>
+          <p>如果是一片空白的話就再找找看哪個細節出問題。</p>
+          <table width="702" border="1" align="center">
+            <tr>
+              <td><img src="re3.jpg" width="702" height="447" /></td>
+            </tr>
+          </table>
+          <h2>步驟二：用Arduino取代Realterm(終端機)與ESP8266溝通，開內建序列監控室窗進行測試</h2>
+          <p>1. 複製以下code</p>
+          <table width="680" border="1" align="center">
+            <tr>
+              <pre><td><h1>#include &lt;SoftwareSerial.h&gt;</h1><h1>SoftwareSerial mySerial(4, 5); // Arduino TX:4, RX:5 <br />
+void setup()<br />
+{<br />
+  // Open serial communications and wait for port to open:<br />
+    Serial.begin(9600);<br />
+    while (!Serial) {<br />
+  ; // wait for serial port to connect. Needed for Leonardo only<br />
+    }<br />
+     mySerial.begin(9600);     </h1><h1>}<br />
+ void loop() // run over and over<br />
+  {<br />
+     if (mySerial.available())<br />
+         Serial.write(mySerial.read());<br />
+      if (Serial.available())<br />
+          mySerial.write(Serial.read());<br />
+ }</h1></td></pre>
+            </tr>
+            </table>
+          <p>2.Arduino與ESP8266連接圖</p>
+          <table width="600" border="1" align="center">
+            <tr>
+              <td height="484"><img src="ESP8266_UNO.jpg" width="597" height="450" /></td>
+            </tr>
+          </table>
+          <p>3. Code第二行是設定ESP8266的TX,RX腳位，預設是TX-&gt;4 ; RX-&gt;5 。程式碼在上傳之前先將RX及TX的線拔掉再燒錄，避免燒錄失敗。</p>
+          <p>4. 燒好之後再插上RX、TX再打開內建序列監控室窗</p>
+          <p>5. 視窗下方選擇NL&amp;CR，輸入AT(大小寫都可)，看到&quot;OK&quot;即完成步驟二(如下圖)</p>
+          <p><a href="http://www.espressif.com/sites/default/files/documentation/4a-esp8266_at_instruction_set_cn.pdf">ESP8266 AT指令</a></p>
+          <table width="500" border="1" align="center">
+            <tr>
+              <td><img src="at1.jpg" width="500" height="467" /></td>
+            </tr>
+        </table>
+          <p>&nbsp;</p></td>
+        </tr>
+      </table>
+    <p>&nbsp;</p></td>
+  </tr>
+</table>
+</body>
+</html>
