@@ -6,6 +6,8 @@ String password="";//password
 
 SoftwareSerial esp(4, 5);// RX, TX
 String data;
+String server = "120.127.14.91"; // www.example.com
+String uri = "yourURI";// our example is /esppost.php
 
 
 void setup()
@@ -68,7 +70,8 @@ void changemode()
     esp.println("AT+CIFSR");
     delay(2000);
     while(esp.available())
-    Serial.write(esp.read());  //?¨ä¸²?—å???Ž§è¦–ç?é¡¯ç¤º ESP8266 ?„å??‰å???    }
+    Serial.write(esp.read());  //åœ¨ä¸²åˆ—åŸ ç›£æŽ§è¦–çª—é¡¯ç¤º ESP8266 çš„å›žæ‡‰å­—å…ƒ
+    }
 
 void loop()
 {

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BufferedWriter bw;            //取得網路輸出串流
     private String Ip;
     private Thread thread;                //執行緒
-    private Socket clientSocket;        //客戶端的socket
+    private Socket clientSocket = new Socket();        //客戶端的socket
     private InetAddress serverIp;
 
     @Override
