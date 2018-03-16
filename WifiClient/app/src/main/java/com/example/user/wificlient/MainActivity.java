@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button buttonconnect,buttondisconnect,buttonA,buttonF,buttonC,buttonL,buttonS,buttonR;
     private Button buttonG,buttonB,buttonD,button9,buttonE,buttonK,button5,button1,button6;
     private Button button3,button0,button4,button7,button2,button8;
-    private EditText Address;
+    private EditText Address,Port;
     private BufferedWriter bw;            //取得網路輸出串流
     private String Ip;
     private Thread thread;                //執行緒
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Address = findViewById(R.id.Ipaddress);
+        Port = findViewById(R.id.Portnumber);
         buttonconnect =  findViewById(R.id.Connect);
         buttonconnect.setOnClickListener(this);
         buttondisconnect = findViewById(R.id.buttondisconnect);
@@ -150,8 +151,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             Ip = Address.getText().toString();
+
             serverIp = InetAddress.getByName(Ip);
-            int serverPort = 8080;
+            int serverPort = Integer.getInteger(Port.getText().toString());
             clientSocket = new Socket(serverIp, serverPort);
             bw = new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream()));
         }

@@ -49,19 +49,26 @@
                 android:layout_weight="1"
                 android:text="Connect" />
 
-            <Button
-                android:id="@+id/buttondisconnect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="disconnect" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <EditText
+                android:id="@+id/Portnumber"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Input Port number"
+                android:inputType="none" />
 
+            <Button
+                android:id="@+id/buttondisconnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Disconnect" />
         </LinearLayout>
 
         <LinearLayout
