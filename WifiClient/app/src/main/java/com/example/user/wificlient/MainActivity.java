@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button button3,button0,button4,button7,button2,button8;
     private EditText Address,Port;
     private BufferedWriter bw;            //取得網路輸出串流
-    private String Ip;
+    private String Ip,Portnumner;
     private Thread thread;                //執行緒
     private Socket clientSocket = new Socket();        //客戶端的socket
     private InetAddress serverIp;
@@ -151,9 +151,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             Ip = Address.getText().toString();
-
+            Portnumner = Port.getText().toString();
             serverIp = InetAddress.getByName(Ip);
-            int serverPort = Integer.getInteger(Port.getText().toString());
+            int serverPort = Integer.parseInt(Portnumner);
             clientSocket = new Socket(serverIp, serverPort);
             bw = new BufferedWriter( new OutputStreamWriter(clientSocket.getOutputStream()));
         }
