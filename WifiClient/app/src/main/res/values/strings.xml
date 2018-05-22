@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WifiClient</string>
+    <string name="input_ip_address">Input IP address</string>
+    <string name="connect">Connect</string>
+    <string name="input_port_number">Input Port number</string>
+    <string name="_1">1</string>
 </resources>
